@@ -1,0 +1,76 @@
+question4 PROC
+; Task 4a: Open a text file and print its content
+  
+
+    ; Open the file for reading
+    mov edx, offset filename
+    call OpenInputFile
+    mov filehandle, eax        
+
+    ; Read the file content
+    mov eax, filehandle
+    mov edx, offset buffer
+    mov ecx, 5000              ; Max buffer size
+    call ReadFromFile
+    mov bytesRead, eax         ; Store the number of bytes read
+
+   
+    mov edx, offset buffer
+    call WriteString
+
+    
+    mov eax, filehandle
+    call CloseFile
+
+    ; Task 4b
+    mov edx, offset filename
+    call CreateOutputFile
+    mov filehandle, eax        ; Store the file handle
+
+    ; Write message1 to the file
+    mov eax, filehandle
+    mov edx, offset message
+    mov ecx, SIZEOF message
+    call WriteToFile
+
+    ; Close the file
+    mov eax, filehandle
+    call CloseFile
+
+    ; Task 4c
+    mov edx, offset filename
+    call OpenOutputFile        ; Open the file for appending
+    mov filehandle, eax        ; Store the file handle
+
+    
+    mov eax, filehandle
+    mov edx, offset message2
+    mov ecx, SIZEOF message2
+    call WriteToFile
+
+    
+    mov eax, filehandle
+    call CloseFile
+
+    ; Task 4d
+
+    mov edx, offset filename
+    call OpenInputFile
+    mov filehandle, eax        
+
+    ; Read the file content
+    mov eax, filehandle
+    mov edx, offset buffer
+    mov ecx, 5000              
+    call ReadFromFile
+    mov bytesRead, eax        
+
+   
+    mov edx, offset buffer
+    call WriteString
+
+    ; Close the file
+    mov eax, filehandle
+    call CloseFile
+
+    question4 ENDP
